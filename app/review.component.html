@@ -1,10 +1,11 @@
 <div *ngIf="name">
-    <div>
-        <h1>Please Enter a Video Game</h1>
-        <h2>More info here!</h2>
+    <div class="title-div">
+        <h1>Please enter a video game name and console you want reviews for.</h1>
     </div>
-    <div>
-        <input [(ngModel)]="name.name" placeholder="Name"/>
+    <div class="game-div">
+        <input [(ngModel)]="name.name" placeholder="Game"/>
+    </div>
+    <div class="console-div">
         <input [(ngModel)]="name.console" placeholder="Console"/>
     </div>
 </div>

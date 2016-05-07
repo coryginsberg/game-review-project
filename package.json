@@ -27,7 +27,8 @@
     "zone.js": "^0.6.12",
 
     "a2-in-memory-web-api": "^0.1.16",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "unirest": "^0.4.2"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",

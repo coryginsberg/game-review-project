@@ -5,8 +5,8 @@ export class Review {
     name:string;
     developer:string;
     console:string;
-    // genre:string;
-    // metacriticReview:number;
-    // gamespotReview:number;
-    // ignReview:number;
+    genre:string;
+    metacriticReview:number;
+    gamespotReview:number;
+    ignReview:number;
 }

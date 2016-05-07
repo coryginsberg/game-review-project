@@ -16,6 +16,7 @@ import {ReviewService} from "./review.service";
         ReviewService
     ]
 })
+
 @RouteConfig([
     {
         path: '/review',
@@ -24,6 +25,7 @@ import {ReviewService} from "./review.service";
         useAsDefault: true
     }
 ])
+
 export class AppComponent {
     title = 'Video Game Reviews';
 }

@@ -21,14 +21,24 @@ export class ReviewComponent implements OnInit {
     }
 
     ngOnInit() {
+        // var unirest = require('unirest');
+        
         let name = +this._routeParams.get('name');
         let gameConsole = +this._routeParams.get('console');
+
         this._reviewService.getReview(REVIEWS[0].name)
             .then(review => this.name = review);
         this._reviewService.getReview(REVIEWS[0].console)
             .then(review => this.console = review);
         console.log(REVIEWS[0].name);
         console.log(name + ", " + gameConsole);
-    }
 
+        // These code snippets use an open-source library. http://unirest.io/nodejs
+        // unirest.get("https://ahmedakhan-game-review-information-v1.p.mashape.com/api/v1/search?game_name=Call+of+Duty")
+        //     .header("X-Mashape-Key", "3eVSH616qYmsh1v5ZbjRPu150bpyp10RGBDjsnWqAfBVERGFB8")
+        //     .header("Accept", "application/json")
+        //     .end(function (result) {
+        //         console.log(result.status, result.headers, result.body);
+        //     });
+    }
 }
