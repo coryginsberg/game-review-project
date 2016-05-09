@@ -1,7 +1,7 @@
 /**
  * Created by coryginsberg on 4/30/16.
  */
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {Review} from "./review";
 import {REVIEWS} from "./mock-reviews";
 

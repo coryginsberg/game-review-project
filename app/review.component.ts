@@ -1,9 +1,9 @@
 /**
  * Created by coryginsberg on 4/30/16.
  */
-import {Component, Input, OnInit} from "angular2/core";
-import {RouteParams} from "angular2/router";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
+import {Component, Input, OnInit} from "@angular/core";
+import {RouteParams} from "@angular/router-deprecated";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
 import {ReviewService} from "./review.service";
 import {REVIEWS} from "./mock-reviews";
@@ -13,6 +13,7 @@ import {REVIEWS} from "./mock-reviews";
     templateUrl: 'app/review.component.html',
     styleUrls: ['app/review.component.css'],
 })
+
 export class ReviewComponent implements OnInit {
     @Input() name:Review;
     @Input() console:Review;
@@ -21,7 +22,7 @@ export class ReviewComponent implements OnInit {
     }
 
     ngOnInit() {
-        // var unirest = require('unirest');
+        //var unirest = require('unirest');
         
         let name = +this._routeParams.get('name');
         let gameConsole = +this._routeParams.get('console');
@@ -40,5 +41,7 @@ export class ReviewComponent implements OnInit {
         //     .end(function (result) {
         //         console.log(result.status, result.headers, result.body);
         //     });
+
+
     }
 }

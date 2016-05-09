@@ -1,11 +1,11 @@
 <div *ngIf="name">
     <div class="title-div">
-        <h1>Please enter a video game name and console you want reviews for.</h1>
+        <h2>Please enter a video game name and console you want reviews for.</h2>
     </div>
     <div class="game-div">
-        <input [(ngModel)]="name.name" placeholder="Game"/>
+        <input [(ngModel)]="name.name" placeholder="Game" class="mdl-textfield__input"/>
     </div>
     <div class="console-div">
-        <input [(ngModel)]="name.console" placeholder="Console"/>
+        <input [(ngModel)]="name.console" placeholder="Console" class="mdl-textfield__input"/>
     </div>
 </div>
