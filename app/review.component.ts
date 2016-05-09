@@ -7,9 +7,11 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
 import {ReviewService} from "./review.service";
 import {REVIEWS} from "./mock-reviews";
+import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
+
 @Component({
     selector: 'my-review',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES],
     templateUrl: 'app/review.component.html',
     styleUrls: ['app/review.component.css'],
 })
@@ -22,7 +24,7 @@ export class ReviewComponent implements OnInit {
     }
 
     ngOnInit() {
-        //var unirest = require('unirest');
+        // var unirest = require('unirest');
         
         let name = +this._routeParams.get('name');
         let gameConsole = +this._routeParams.get('console');
