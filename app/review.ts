@@ -1,5 +1,7 @@
 /**
  * Created by coryginsberg on 4/30/16.
+ *
+ * Review Definition
  */
 export class Review {
     name:string;

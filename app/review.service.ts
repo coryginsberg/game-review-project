@@ -1,5 +1,7 @@
 /**
  * Created by coryginsberg on 4/30/16.
+ *
+ * Review Service of the App
  */
 import {Injectable} from "@angular/core";
 import {Review} from "./review";

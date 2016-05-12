@@ -1,5 +1,7 @@
 /**
  * Created by coryginsberg on 4/30/16.
+ *
+ * Review Component of the App
  */
 import {Component, Input, OnInit} from "@angular/core";
 import {RouteParams} from "@angular/router-deprecated";

@@ -1,5 +1,8 @@
 /**
  * Created by coryginsberg on 4/30/16.
+ *
+ * Mock Reviews for the App
+ * ***Note: For Testing Purposes Only!!!***
  */
 import {Review} from "./review";
 
