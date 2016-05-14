@@ -7,6 +7,7 @@ import {Injectable} from "@angular/core";
 import {Review} from "./review";
 import {REVIEWS} from "./mock-reviews";
 
+
 @Injectable()
 export class ReviewService {
     static getReviews() {

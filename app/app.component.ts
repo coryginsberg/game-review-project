@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router-deprecated";
+import {Router, ROUTER_DIRECTIVES, Routes} from "@angular/router";
 import {ReviewComponent} from "./review.component";
 import {ReviewService} from "./review.service";
+import {ReviewDetailComponent} from "./review-detail.component";
 
 @Component({
     selector: 'my-app',
@@ -11,21 +12,17 @@ import {ReviewService} from "./review.service";
   `,
     styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [
-        ROUTER_PROVIDERS,
-        ReviewService
-    ]
+    providers: [ReviewService]
 })
 
-@RouteConfig([
-    {
-        path: '/review',
-        name: 'Review',
-        component: ReviewComponent,
-        useAsDefault: true
-    }
+@Routes([
+    {path: '/review', component: ReviewComponent},
+    {path: '/review/details', component: ReviewDetailComponent}
 ])
 
 export class AppComponent {
+    constructor(private router:Router) {
+    }
+
     title = 'Video Game Reviews';
 }

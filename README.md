@@ -131,7 +131,7 @@ That command first compiles, then simultaneously starts the Http-Server at `loca
 and launches protractor.  
 
 The pass/fail test results appear at the bottom of the terminal window.
-A custom reporter (see `protractor.config.js`) generates a  `./protractor-results.txt` file 
+A custom reporter (see `protractor.systemjs.config.js`) generates a  `./protractor-results.txt` file
 which is easier to read; this file is excluded from source control.
 
 Shut it down manually with Ctrl-C.

@@ -11,3 +11,4 @@ export class Review {
     platforms:{ [index:string]:string };
     thumb:string;
 }
+
