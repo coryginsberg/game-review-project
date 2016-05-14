@@ -32,9 +32,9 @@ export class ReviewComponent implements OnInit {
                 private _router:Router) {
     }
     
-    gotoDetail() {
-        //this._router.navigate(['ReviewDetail', { id: this.selectedGame.id }]);
-    }
+    // gotoDetail() {
+    //     //this._router.navigate(['ReviewDetail', { id: this.selectedGame.id }]);
+    // }
 
     ngOnInit() {
         // var unirest = require('unirest');

@@ -1,7 +1,7 @@
 /**
  * Created by Cory Ginsberg on 5/13/2016.
  */
-import {OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {RouteParams} from "@angular/router-deprecated";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
@@ -10,7 +10,7 @@ import {REVIEWS} from "./mock-reviews";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
 
-@component({
+@Component({
   selector: 'review-detail',
   templateUrl: 'app/review-detail.component.html',
   styleUrls: ['app/review-detail.component.css'],
@@ -27,7 +27,7 @@ export class ReviewDetailComponent implements OnInit {
   
   constructor(private _reviewService:ReviewService,
               private _routeParams:RouteParams) {
-  }
+    }
   
   ngOnInit() {
     let title = +this._routeParams.get('title');
