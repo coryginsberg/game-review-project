@@ -18,10 +18,10 @@ export class ReviewService {
             setTimeout(()=>resolve(REVIEWS), 2000) // 2 seconds
         );
     }
-
-    getReview(name:string) {
+    
+    getReview(title:string) {
         return Promise.resolve(REVIEWS).then(
-            reviews => reviews.filter(review => review.name === name)[0]
+            reviews => reviews.filter(review => review.title === title)[0]
         );
     }
 }

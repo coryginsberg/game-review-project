@@ -31,6 +31,11 @@
             format: 'cjs',
             defaultExtension: 'js',
             main: 'input.js'
+        },
+        '@angular2-material/button': {
+            format: 'cjs',
+            defaultExtension: 'js',
+            main: 'button.js'
         }
     };
 

@@ -1,14 +1,17 @@
-<div *ngIf="name">
-    <div class="title-div">
+<div *ngIf="title" xmlns="http://www.w3.org/1999/html">
+    <section class="title-div">
         <h2>Please enter a video game name and console you want reviews for.</h2>
-    </div>
-    <div class="game-div">
-        <md-input [(ngModel)]="name.name" dividerColor="warn" placeholder="Name of the Game." class="input-full-width">
-        </md-input>
-    </div>
-    <div class="console-div">
-        <md-input [(ngModel)]="name.console" dividerColor="warn" placeholder="Console the Game is Played On."
-                  class="input-full-width">
-        </md-input>
+    </section>
+    <div class="form-div">
+        <form class="main-form">
+            <div class="game-div">
+                <md-input [(ngModel)]="title.title" dividerColor="warn" placeholder="Name of the Game."
+                          class="game-input">
+                </md-input>
+            </div>
+
+            <button md-raised-button type="submit" color="warn" class="btn btn-default review-btn">Get Reviews</button>
+
+        </form>
     </div>
 </div>

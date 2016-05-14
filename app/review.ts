@@ -4,11 +4,10 @@
  * Review Definition
  */
 export class Review {
-    name:string;
-    developer:string;
-    console:string;
-    genre:string;
-    metacriticReview:number;
-    gamespotReview:number;
-    ignReview:number;
+    title:string;
+    score:string;
+    publisher:string;
+    short_description:string;
+    platforms:{ [index:string]:string };
+    thumb:string;
 }

@@ -10,34 +10,29 @@ import {Review} from "./review";
 import {ReviewService} from "./review.service";
 import {REVIEWS} from "./mock-reviews";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
+import {MdButton} from "@angular2-material/button";
 
 @Component({
     selector: 'my-review',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES, MdButton],
     templateUrl: 'app/review.component.html',
     styleUrls: ['app/review.component.css'],
 })
 
 export class ReviewComponent implements OnInit {
-    @Input() name:Review;
-    @Input() console:Review;
+    @Input() title:Review;
+    score:Review;
+    publisher:Review;
+    short_description:Review;
+    platforms:Review;
+    thumb:Review;
+
     constructor(private _reviewService:ReviewService,
                 private _routeParams:RouteParams) {
     }
 
     ngOnInit() {
         // var unirest = require('unirest');
-        
-        let name = +this._routeParams.get('name');
-        let gameConsole = +this._routeParams.get('console');
-
-        this._reviewService.getReview(REVIEWS[0].name)
-            .then(review => this.name = review);
-        this._reviewService.getReview(REVIEWS[0].console)
-            .then(review => this.console = review);
-        console.log(REVIEWS[0].name);
-        console.log(name + ", " + gameConsole);
-
         // These code snippets use an open-source library. http://unirest.io/nodejs
         // unirest.get("https://ahmedakhan-game-review-information-v1.p.mashape.com/api/v1/search?game_name=Call+of+Duty")
         //     .header("X-Mashape-Key", "3eVSH616qYmsh1v5ZbjRPu150bpyp10RGBDjsnWqAfBVERGFB8")
@@ -45,7 +40,21 @@ export class ReviewComponent implements OnInit {
         //     .end(function (result) {
         //         console.log(result.status, result.headers, result.body);
         //     });
-
+    
+        let title = +this._routeParams.get('title');
+        this._reviewService.getReview(REVIEWS[0].title)
+            .then(review => this.title = review);
+        console.log(REVIEWS[0].title);
+        console.log(REVIEWS[0].score);
+        console.log(REVIEWS[0].short_description);
+    
+        for (var key in REVIEWS[0].platforms) {
+            var system = REVIEWS[0].platforms[key];
+            console.log('Key ' + key + ' has value : ' + system);
+        }
+    
+        console.log(REVIEWS[0].platforms);
+        console.log(REVIEWS[0].thumb);
 
     }
 }
