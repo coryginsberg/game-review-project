@@ -4,7 +4,7 @@
  * Review Component of the App
  */
 import {Component, Input, OnInit} from "@angular/core";
-import {RouteParams} from "@angular/router-deprecated";
+import {Router, RouteParams} from "@angular/router-deprecated";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
 import {ReviewService} from "./review.service";
@@ -26,9 +26,14 @@ export class ReviewComponent implements OnInit {
     short_description:Review;
     platforms:Review;
     thumb:Review;
-
+    
     constructor(private _reviewService:ReviewService,
-                private _routeParams:RouteParams) {
+                private _routeParams:RouteParams,
+                private _router:Router) {
+    }
+    
+    gotoDetail() {
+        //this._router.navigate(['ReviewDetail', { id: this.selectedGame.id }]);
     }
 
     ngOnInit() {
@@ -46,6 +51,7 @@ export class ReviewComponent implements OnInit {
             .then(review => this.title = review);
         console.log(REVIEWS[0].title);
         console.log(REVIEWS[0].score);
+        console.log(REVIEWS[0].publisher);
         console.log(REVIEWS[0].short_description);
     
         for (var key in REVIEWS[0].platforms) {
