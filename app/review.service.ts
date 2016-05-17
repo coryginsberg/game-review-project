@@ -10,9 +10,6 @@ import {REVIEWS} from "./mock-reviews";
 
 @Injectable()
 export class ReviewService {
-    static getReviews() {
-        return Promise.resolve(REVIEWS);
-    }
 
     getReviewSlowly() {
         return new Promise<Review[]>(resolve =>

@@ -4,7 +4,7 @@
  * Review Component of the App
  */
 import {Component, Input, OnInit} from "@angular/core";
-import {Router, ROUTER_DIRECTIVES} from "@angular/router";
+import {RouteParams} from "@angular/router-deprecated";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
 import {ReviewService} from "./review.service";
@@ -15,21 +15,16 @@ import {ReviewDetailComponent} from "./review-detail.component";
 
 @Component({
     selector: 'my-review',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES, MdButton, ReviewDetailComponent, ROUTER_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES, MdButton, ReviewDetailComponent],
     templateUrl: 'app/review.component.html',
     styleUrls: ['app/review.component.css'],
 })
 
 export class ReviewComponent implements OnInit {
     @Input() title:Review;
-    score:Review;
-    publisher:Review;
-    short_description:Review;
-    platforms:Review;
-    thumb:Review;
 
-    constructor(private router:Router,
-                private service:ReviewService) {
+    constructor(private routeParams:RouteParams,
+                private reviewService:ReviewService) {
     }
 
 
@@ -47,7 +42,7 @@ export class ReviewComponent implements OnInit {
     }
 
     printToConsole() {
-        this.service.getReview(REVIEWS[0].title)
+        this.reviewService.getReview(REVIEWS[0].title)
             .then(review => this.title = review);
         console.log(REVIEWS[0].title);
         console.log(REVIEWS[0].score);
@@ -61,9 +56,5 @@ export class ReviewComponent implements OnInit {
 
         console.log(REVIEWS[0].platforms);
         console.log(REVIEWS[0].thumb);
-    }
-
-    goToDetail() {
-        this.router.navigate(['/review', REVIEWS[0].title]);
     }
 }
