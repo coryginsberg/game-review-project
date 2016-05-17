@@ -5,14 +5,14 @@
     <div class="form-div">
         <form class="main-form">
             <div class="game-div">
-                <md-input [(ngModel)]="title.title" dividerColor="warn" placeholder="Name of the Game"
+                <md-input #title (keyup.enter)="getTitle(title.value)"
+                          (blur)="getTitle(title.value)" type="text" dividerColor="warn" placeholder="Name of the Game"
                           class="game-input"></md-input>
             </div>
 
-            <button [routerLink]="['/review/:title.title', title.title]" md-raised-button type="submit" color="warn"
+            <button (click)="getTitle(title.value)" md-raised-button type="submit" color="warn"
                     class="btn btn-default review-btn">Get Reviews
             </button>
-
         </form>
     </div>
 </div>

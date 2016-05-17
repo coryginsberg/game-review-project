@@ -2,7 +2,7 @@
  * Created by Cory Ginsberg on 5/13/2016.
  */
 import {Component, OnInit} from "@angular/core";
-import {Router, RouteSegment} from "@angular/router";
+import {RouteParams} from "@angular/router-deprecated";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
 import {ReviewService} from "./review.service";
@@ -18,29 +18,18 @@ import {MdButton} from "@angular2-material/button";
 })
 
 export class ReviewDetailComponent implements OnInit {
-  review:Review;
   title:Review;
-  score:Review;
-  publisher:Review;
-  short_description:Review;
-  platforms:Review;
-  thumb:Review;
 
-  constructor(private router:Router,
-              private service:ReviewService) {
-  }
-
-  routerOnActivate(curr:RouteSegment):void {
-    let title = +curr.getParam('title');
-    this.service.getReview(title.toString()).then(title => this.title = title);
+  constructor(private routeParams:RouteParams,
+              private reviewService:ReviewService) {
   }
 
   ngOnInit() {
-    this.printToConsole();
+    let title = this.routeParams.get('title');
   }
 
   printToConsole() {
-    this.service.getReview(REVIEWS[0].title)
+    this.reviewService.getReview(REVIEWS[0].title)
         .then(review => this.title = review);
     console.log(REVIEWS[0].title);
     console.log(REVIEWS[0].score);
