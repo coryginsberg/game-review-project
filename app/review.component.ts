@@ -28,7 +28,7 @@ export class ReviewComponent implements OnInit {
 
     getTitle(title:string) {
         this.title = title;
-        console.log(title);
+        console.log(title); 
 
         this.router.navigate(['ReviewDetail', {title: this.title}]);
     }
