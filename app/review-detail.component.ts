@@ -2,7 +2,7 @@
  * Created by Cory Ginsberg on 5/13/2016.
  */
 import {Component, OnInit} from "@angular/core";
-import {RouteParams} from "@angular/router-deprecated";
+import {Router, RouteParams} from "@angular/router-deprecated";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {Review} from "./review";
 import {ReviewService} from "./review.service";
@@ -21,15 +21,17 @@ export class ReviewDetailComponent implements OnInit {
   title:Review;
 
   constructor(private routeParams:RouteParams,
-              private reviewService:ReviewService) {
+              private service:ReviewService,
+              private router:Router) {
   }
 
   ngOnInit() {
     let title = this.routeParams.get('title');
+    this.service.getReview(title).then(title => this.title = title);
   }
 
   printToConsole() {
-    this.reviewService.getReview(REVIEWS[0].title)
+    this.service.getReview(REVIEWS[0].title)
         .then(review => this.title = review);
     console.log(REVIEWS[0].title);
     console.log(REVIEWS[0].score);

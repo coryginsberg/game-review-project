@@ -23,14 +23,14 @@ export class ReviewComponent implements OnInit {
     title = '';
 
     constructor(private router:Router,
-                private reviewService:ReviewService) {
+                private service:ReviewService) {
     }
 
     getTitle(title:string) {
         this.title = title;
-        console.log(title); 
-
-        this.router.navigate(['ReviewDetail', {title: this.title}]);
+        console.log(title);
+    
+        // this.router.navigate(['ReviewDetails', {title: this.title}]);
     }
 
     ngOnInit() {
@@ -38,8 +38,8 @@ export class ReviewComponent implements OnInit {
     }
 
     printToConsole() {
-        this.reviewService.getReview(REVIEWS[0].title)
-            .then(string => this.title = string);
+        this.service.getReview(REVIEWS[0].title)
+            .then(title => this.title = title);
         console.log(REVIEWS[0].title);
         console.log(REVIEWS[0].score);
         console.log(REVIEWS[0].publisher);

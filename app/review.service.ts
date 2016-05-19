@@ -4,18 +4,10 @@
  * Review Service of the App
  */
 import {Injectable} from "@angular/core";
-import {Review} from "./review";
 import {REVIEWS} from "./mock-reviews";
-
 
 @Injectable()
 export class ReviewService {
-
-    getReviewSlowly() {
-        return new Promise<Review[]>(resolve =>
-            setTimeout(()=>resolve(REVIEWS), 2000) // 2 seconds
-        );
-    }
     
     getReview(title:string) {
         return Promise.resolve(REVIEWS).then(

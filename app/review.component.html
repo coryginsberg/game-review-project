@@ -5,9 +5,8 @@
     <div class="form-div">
         <form class="main-form">
             <div class="game-div">
-                <md-input #title (keyup.enter)="getTitle(title.value)"
-                          (blur)="getTitle(title.value)" type="text" dividerColor="warn" placeholder="Name of the Game"
-                          class="game-input"></md-input>
+                <md-input #title (keyup.enter)="getTitle(title.value)" (blur)="getTitle(title.value)" type="text"
+                          dividerColor="warn" placeholder="Name of the Game" class="game-input"></md-input>
             </div>
 
             <button (click)="getTitle(title.value)" md-raised-button type="submit" color="warn"
