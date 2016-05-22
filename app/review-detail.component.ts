@@ -2,37 +2,35 @@
  * Created by Cory Ginsberg on 5/13/2016.
  */
 import {Component, OnInit} from "@angular/core";
-import {Router, RouteParams} from "@angular/router-deprecated";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
-import {Review} from "./review";
-import {ReviewService} from "./review.service";
+import {Router, RouteParams, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {REVIEWS} from "./mock-reviews";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
 
 @Component({
   selector: 'review-detail',
-  templateUrl: 'app/review-detail.component.html',
+  template: `
+    <h2>{{title}}</h2>
+    <div>
+        <h2>{{title | uppercase}} is my hero</h2>
+    </div>
+  `,
   styleUrls: ['app/review-detail.component.css'],
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES, MdButton]
+  directives: [MD_INPUT_DIRECTIVES, MdButton, ROUTER_DIRECTIVES]
 })
 
 export class ReviewDetailComponent implements OnInit {
-  title:Review;
+  title:string;
 
   constructor(private routeParams:RouteParams,
-              private service:ReviewService,
               private router:Router) {
   }
 
   ngOnInit() {
     let title = this.routeParams.get('title');
-    this.service.getReview(title).then(title => this.title = title);
   }
 
   printToConsole() {
-    this.service.getReview(REVIEWS[0].title)
-        .then(review => this.title = review);
     console.log(REVIEWS[0].title);
     console.log(REVIEWS[0].score);
     console.log(REVIEWS[0].publisher);

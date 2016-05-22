@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from "@angular/router-deprecated";
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router-deprecated";
+import {Review} from "./review";
 import {ReviewComponent} from "./review.component";
-import {ReviewService} from "./review.service";
 import {ReviewDetailComponent} from "./review-detail.component";
 
 @Component({
@@ -11,9 +11,8 @@ import {ReviewDetailComponent} from "./review-detail.component";
         <router-outlet></router-outlet>
   `,
     styleUrls: ['app/app.component.css'],
-    directives: [ROUTER_DIRECTIVES],
-    providers: [ROUTER_PROVIDERS,
-        ReviewService]
+    directives: [ROUTER_DIRECTIVES, ReviewDetailComponent],
+    providers: [ROUTER_PROVIDERS]
 })
 
 @RouteConfig([
@@ -23,7 +22,8 @@ import {ReviewDetailComponent} from "./review-detail.component";
 
 export class AppComponent {
     title = 'Video Game Reviews';
+    reviews:Review[];
     
-    constructor(public router:Router) {
+    ngOnInit() {
     }
 }
