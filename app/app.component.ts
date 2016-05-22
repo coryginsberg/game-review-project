@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {RouteConfig, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from "@angular/router-deprecated";
 import {ReviewComponent} from "./review.component";
 import {ReviewService} from "./review.service";
 import {ReviewDetailComponent} from "./review-detail.component";
@@ -12,14 +12,18 @@ import {ReviewDetailComponent} from "./review-detail.component";
   `,
     styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [ReviewService]
+    providers: [ROUTER_PROVIDERS,
+        ReviewService]
 })
 
 @RouteConfig([
     {path: '/review', name: 'Review', component: ReviewComponent, useAsDefault: true},
-    {path: '/reviewds/:title', name: 'ReviewDetails', component: ReviewDetailComponent}
+    {path: '/review/:title', name: 'ReviewDetails', component: ReviewDetailComponent}
 ])
 
 export class AppComponent {
     title = 'Video Game Reviews';
+    
+    constructor(public router:Router) {
+    }
 }

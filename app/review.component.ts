@@ -4,7 +4,7 @@
  * Review Component of the App
  */
 import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router-deprecated";
+import {Router, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "@angular/common";
 import {ReviewService} from "./review.service";
 import {REVIEWS} from "./mock-reviews";
@@ -14,7 +14,7 @@ import {ReviewDetailComponent} from "./review-detail.component";
 
 @Component({
     selector: 'my-review',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES, MdButton, ReviewDetailComponent],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES, MdButton, ReviewDetailComponent, ROUTER_DIRECTIVES],
     templateUrl: 'app/review.component.html',
     styleUrls: ['app/review.component.css'],
 })
@@ -29,17 +29,21 @@ export class ReviewComponent implements OnInit {
     getTitle(title:string) {
         this.title = title;
         console.log(title);
-    
-        // this.router.navigate(['ReviewDetails', {title: this.title}]);
+        if (title != null) {
+            this.router.navigate(['ReviewDetails', {title: this.title}]);
+        } else {
+            console.log("Hello World");
+        }
+
     }
 
     ngOnInit() {
+        this.service.getReview(REVIEWS[0].title).then(title => this.title = title);
         this.printToConsole();
     }
 
     printToConsole() {
-        this.service.getReview(REVIEWS[0].title)
-            .then(title => this.title = title);
+    
         console.log(REVIEWS[0].title);
         console.log(REVIEWS[0].score);
         console.log(REVIEWS[0].publisher);

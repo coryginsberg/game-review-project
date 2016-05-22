@@ -9,7 +9,7 @@
                           dividerColor="warn" placeholder="Name of the Game" class="game-input"></md-input>
             </div>
 
-            <button (click)="getTitle(title.value)" md-raised-button type="submit" color="warn"
+            <button [routerLink]="['ReviewDetails', {title: title.value}]" md-raised-button type="submit" color="warn"
                     class="btn btn-default review-btn">Get Reviews
             </button>
         </form>
