@@ -1,5 +1,7 @@
 /**
  * Created by Cory Ginsberg on 5/13/2016.
+ *
+ * Review-Detail Component
  */
 import {Component, OnInit} from "@angular/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
@@ -11,18 +13,20 @@ import {MdButton} from "@angular2-material/button";
 @Component({
   selector: 'review-detail',
   template: `
-    <h2 class="md-display-1">{{game.title}}</h2>
-    <div>
-        <h3 class="md-headline">{{game.publisher}}</h3>
-        <h1 class="md-headline">{{game.score}}</h1>
+    <div class="details-div">
+      <h2>{{game.title}}</h2>
+      <h3>By {{game.publisher}}</h3>
+    
+      <h1 class="score">{{game.score}}</h1>
+      <h3>{{game.short_description}}</h3>
+      <img src="{{game.thumb}}" alt="{{game.title}} Thumbnail" title="{{game.title}} Thumbnail" width="160px">
+      <h4>This game is available on:</h4>
+      <li *ngFor="let platform of platforms">
+        {{platform}}
+      </li>
+      <br>
+      <button (click)="goBack()" type="submit" class="btn btn-default review-btn" md-raised-button color="warn">Search For Another Game</button>
     </div>
-    <h3>{{game.short_description}}</h3>
-    <img src="{{game.thumb}}" alt="{{game.title}} Thumbnail" title="{{game.title}} Thumbnail">
-    <li *ngFor="let platform of platforms">
-      {{platform}}
-    </li>
-    <br>
-    <button (click)="goBack()" type="submit" class="btn btn-default review-btn" md-raised-button color="warn">Search For Another Game</button>
   `,
   styleUrls: ['app/review-detail.component.css'],
   directives: [MD_INPUT_DIRECTIVES, MdButton, ROUTER_DIRECTIVES]
