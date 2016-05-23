@@ -8,7 +8,6 @@ import {Router, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {REVIEWS} from "./mock-reviews";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
-// import {ReviewDetailComponent} from "./review-detail.component";
 
 @Component({
     selector: 'my-review',

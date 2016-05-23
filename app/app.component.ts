@@ -7,7 +7,6 @@ import {ReviewDetailComponent} from "./review-detail.component";
 @Component({
     selector: 'my-app',
     template: `
-        <h1>{{title}}</h1>
         <router-outlet></router-outlet>
   `,
     styleUrls: ['app/app.component.css'],
@@ -21,7 +20,6 @@ import {ReviewDetailComponent} from "./review-detail.component";
 ])
 
 export class AppComponent {
-    title = 'Video Game Reviews';
     reviews:Review[];
     
     ngOnInit() {
