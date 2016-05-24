@@ -9,6 +9,7 @@ import {REVIEWS} from "./mock-reviews";
 import {Review} from "./review";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'review-detail', 
@@ -36,12 +37,16 @@ export class ReviewDetailComponent implements OnInit {
   game:Review;
   title = 'Sorry! The game you entered was not found. Please make sure you spelled the name right and try again.';
   platforms:string[] = [];
-  
-  constructor(private routeParams:RouteParams) {
+
+  data:Object;
+  loading:boolean;
+  http:Http;
+
+  constructor(private routeParams:RouteParams, http:Http) {
+    this.http = http;
   }
 
   ngOnInit() {
-
     name = this.routeParams.get('title').replace(/%20/, " ");
     for (var game of REVIEWS) {
       if (name.toUpperCase() == game.title.toUpperCase()) {

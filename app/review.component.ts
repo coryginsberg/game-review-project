@@ -8,6 +8,8 @@ import {Router, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {REVIEWS} from "./mock-reviews";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
+import {Http, Response} from "@angular/http";
+
 
 @Component({
     selector: 'my-review',
@@ -22,17 +24,24 @@ import {MdButton} from "@angular2-material/button";
                     <md-input #title (keyup.enter)="getTitle(title.value)" (blur)="getTitle(title.value)" type="text" dividerColor="warn" placeholder="Name of the Game" class="game-input"></md-input>
                 </div>
     
-                <button [routerLink]="['ReviewDetails', {title: title.value}]" md-raised-button type="submit" color="warn" class="btn btn-default review-btn">Get Reviews</button>
+                <button (click)="makeRequest()" md-raised-button type="submit" color="warn" class="btn btn-default review-btn">Get Reviews</button>
             </form>
         </div>
+        <button type="button" (click)="makeRequest()">Make Request</button>
+        <div *ngIf="loading">Loading...</div>
+        <pre>{{data | json}}</pre>
     `,
     styleUrls: ['app/review.component.css'],
 })
 
 export class ReviewComponent implements OnInit {
     title = '';
-    
-    constructor(private router:Router) {
+    data:Object;
+    loading:boolean;
+    http:Http;
+
+    constructor(private router:Router, http:Http) {
+        this.http = http;
     }
 
     getTitle(title:string) {
@@ -44,6 +53,15 @@ export class ReviewComponent implements OnInit {
             console.log("Hello World");
         }
 
+    }
+
+    makeRequest(request:String) {
+        this.loading = true;
+        this.http.request('http://www.giantbomb.com/api/game/1/?api_key=9e110c38f924128c200ce3bea458dd12fc4acc90&format=jsonp&json_callback=search')
+            .subscribe((res:Response) => {
+                this.data = res.json();
+                this.loading = false;
+            });
     }
 
     ngOnInit() {
@@ -65,3 +83,12 @@ export class ReviewComponent implements OnInit {
         console.log(REVIEWS[0].thumb);
     }
 }
+
+class SearchResult {
+    title:string;
+
+    constructor(obj?:any) {
+        this.title = obj && obj.title || null;
+    }
+}
+
