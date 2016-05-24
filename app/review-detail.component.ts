@@ -11,7 +11,7 @@ import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
 
 @Component({
-  selector: 'review-detail',
+  selector: 'review-detail', 
   template: `
     <div class="details-div">
       <h2>{{game.title}}</h2>
