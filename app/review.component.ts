@@ -3,13 +3,16 @@
  *
  * Review Component of the App
  */
-import {Component, OnInit} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import {Router, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {REVIEWS} from "./mock-reviews";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
-import {Http, Response} from "@angular/http";
+import {Http, Jsonp} from "@angular/http";
 
+
+let GIANTBOMB_API_KEY = '9e110c38f924128c200ce3bea458dd12fc4acc90';
+let GIANTBOMB_API_URL = 'http://www.giantbomb.com/api/search/?';
 
 @Component({
     selector: 'my-review',
@@ -39,9 +42,11 @@ export class ReviewComponent implements OnInit {
     data:Object;
     loading:boolean;
     http:Http;
+    jsonp:Jsonp;
 
-    constructor(private router:Router, http:Http) {
+    constructor(private router:Router, http:Http, jsonp:Jsonp, @Inject(GIANTBOMB_API_KEY) private apiKey, @Inject(GIANTBOMB_API_URL) private apiUrl) {
         this.http = http;
+        this.jsonp = jsonp;
     }
 
     getTitle(title:string) {
@@ -55,13 +60,29 @@ export class ReviewComponent implements OnInit {
 
     }
 
-    makeRequest(request:String) {
-        this.loading = true;
-        this.http.request('http://www.giantbomb.com/api/game/1/?api_key=9e110c38f924128c200ce3bea458dd12fc4acc90&format=jsonp&json_callback=search')
-            .subscribe((res:Response) => {
-                this.data = res.json();
-                this.loading = false;
-            });
+    makeRequest(request:string) {
+        this.search(request);
+    }
+
+    search(query:string) {
+        let params:string = [
+            `query=${query}`,
+            `api_key=${this.apiKey}`,
+            `field_list=aliases`,
+            `limit=5`,
+            `format=jsonp`,
+            `json_callback=JSONP_CALLBACK`
+        ].join('&');
+        let queryUrl = `${this.apiUrl}?${params}`;
+
+        return this.jsonp.get(queryUrl).map(response => {
+            return (<any>response.items.map(item => {
+                console.log("raw item", item); // uncomment if you want to debug
+                return new SearchResult({
+                    title: item.id.aliases
+                })
+            }))
+        })
     }
 
     ngOnInit() {
