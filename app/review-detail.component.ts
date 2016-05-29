@@ -5,14 +5,12 @@
  */
 import {Component, OnInit} from "@angular/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
-import {REVIEWS} from "./mock-reviews";
-import {Review} from "./review";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
 import {Http} from "@angular/http";
 
 @Component({
-  selector: 'review-detail', 
+  selector: 'review-detail',
   template: `
     <div class="details-div">
       <h2>{{game.title}}</h2>
@@ -34,7 +32,7 @@ import {Http} from "@angular/http";
 })
 
 export class ReviewDetailComponent implements OnInit {
-  game:Review;
+  // game:Review;
   title = 'Sorry! The game you entered was not found. Please make sure you spelled the name right and try again.';
   platforms:string[] = [];
 
@@ -48,23 +46,23 @@ export class ReviewDetailComponent implements OnInit {
 
   ngOnInit() {
     name = this.routeParams.get('title').replace(/%20/, " ");
-    for (var game of REVIEWS) {
-      if (name.toUpperCase() == game.title.toUpperCase()) {
-        this.title = this.routeParams.get('title').replace(/%20/, " ");
-        this.game = game;
-    
-        for (var key in game.platforms) {
-          let system = game.platforms[key];
-          this.platforms.push(system);
-        }
-      }
-      console.log(game.title);
-    }
+    // for (var game of REVIEWS) {
+    //   if (name.toUpperCase() == game.title.toUpperCase()) {
+    //     this.title = this.routeParams.get('title').replace(/%20/, " ");
+    //     this.game = game;
+    //
+    //     for (var key in game.platforms) {
+    //       let system = game.platforms[key];
+    //       this.platforms.push(system);
+    //     }
+    //   }
+    //   console.log(game.title);
+    // }
   }
-  
+
   //FIXME: When going back from a search that is not in the game list, the page reverts to a white button and nothing happens when pressed. Works fine when the search succeeds.
   goBack() {
     window.history.back();
   }
-  
 }
+

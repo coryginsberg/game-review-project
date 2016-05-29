@@ -1,27 +1,27 @@
 :host {
-    width: 100%;
+  width: 100%;
 }
 
 .title-div {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .main-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 10% 5% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10% 5% 10%;
 }
 
 .game-input {
-    width: 100%;
-    font-size: 30px;
-    margin-bottom: 30px;
+  width: 100%;
+  font-size: 30px;
+  margin-bottom: 30px;
 }
 
 .review-btn {
-    font-size: 30px;
-    height: 75px;
+  font-size: 30px;
+  height: 75px;
 }
 
