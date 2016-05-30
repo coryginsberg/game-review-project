@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router-deprecated";
 import {ReviewComponent} from "./review.component";
 import {ReviewDetailComponent} from "./review-detail.component";
-import {SearchResult} from "./search.results";
+// import {SearchResult} from "./search.results";
 
 @Component({
   selector: 'my-app',
