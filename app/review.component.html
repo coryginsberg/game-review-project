@@ -1,0 +1,13 @@
+<section class="title-div">
+  <h2>Please enter a video game name you want reviews for.</h2>
+</section>
+
+<div class="game-div">
+  <input #title type="text" placeholder="Name of the Game" class="game-input" (keyup.enter)="search(title.value)"
+         (blur)="search(title.value)"/>
+</div>
+
+<button (click)="search(title.value)" md-raised-button type="submit" color="warn" class="btn btn-default review-btn">Get
+  Reviews
+</button>
+

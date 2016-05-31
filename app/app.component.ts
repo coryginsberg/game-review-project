@@ -2,7 +2,8 @@ import {Component} from "@angular/core";
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "@angular/router-deprecated";
 import {ReviewComponent} from "./review.component";
 import {ReviewDetailComponent} from "./review-detail.component";
-// import {SearchResult} from "./search.results";
+import {ReviewResultsComponent} from "./review-results.component";
+import {SearchService} from "./search.service";
 
 @Component({
   selector: 'my-app',
@@ -10,17 +11,16 @@ import {ReviewDetailComponent} from "./review-detail.component";
         <router-outlet></router-outlet>
   `,
   styleUrls: ['app/app.component.css'],
-  directives: [ROUTER_DIRECTIVES, ReviewDetailComponent],
-  providers: [ROUTER_PROVIDERS]
+  directives: [ROUTER_DIRECTIVES, ReviewDetailComponent, ReviewResultsComponent],
+  providers: [ROUTER_PROVIDERS, SearchService]
 })
 
 @RouteConfig([
-  {path: '/review',        name: 'Review',        component: ReviewComponent,       useAsDefault: true},
-  {path: '/review/:title', name: 'ReviewDetails', component: ReviewDetailComponent}
+  {path: '/', name: 'Review', component: ReviewComponent, useAsDefault: true},
+  {path: '/:id', name: 'ReviewResults', component: ReviewResultsComponent},
+  {path: '/results/:title', name: 'ReviewDetails', component: ReviewDetailComponent}
 ])
 
 export class AppComponent {
-
-  ngOnInit() {
-  }
+  title = 'Video Game Reviews!'
 }

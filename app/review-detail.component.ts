@@ -4,31 +4,27 @@
  * Review-Detail Component
  */
 import {Component, OnInit} from "@angular/core";
-import {RouteParams, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {Router, RouteParams, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {MD_INPUT_DIRECTIVES} from "@angular2-material/input";
 import {MdButton} from "@angular2-material/button";
-import {Http} from "@angular/http";
+import {Http, JSONP_PROVIDERS} from "@angular/http";
+import {SearchService} from "./search.service";
 
 @Component({
   selector: 'review-detail',
   template: `
     <div class="details-div">
-      <h2>{{game.title}}</h2>
-      <h3>By {{game.publisher}}</h3>
-    
-      <h1 class="score">{{game.score}}</h1>
-      <h3>{{game.short_description}}</h3>
-      <img src="{{game.thumb}}" alt="{{game.title}} Thumbnail" title="{{game.title}} Thumbnail" width="160px">
-      <h4>This game is available on:</h4>
-      <li *ngFor="let platform of platforms">
-        {{platform}}
+      <h2>Results for: {{title}}</h2>
+      <li *ngFor="let result of results">
+        <a (click)="goToDetail(result.name)">{{result.name}}</a>
       </li>
       <br>
-      <button (click)="goBack()" type="submit" class="btn btn-default review-btn" md-raised-button color="warn">Search For Another Game</button>
+      <button (click)="goBack()" type="submit" class="btn btn-default review-btn" md-raised-button color="warn">Back To Search</button>
     </div>
   `,
   styleUrls: ['app/review-detail.component.css'],
-  directives: [MD_INPUT_DIRECTIVES, MdButton, ROUTER_DIRECTIVES]
+  directives: [MD_INPUT_DIRECTIVES, MdButton, ROUTER_DIRECTIVES],
+  providers: [JSONP_PROVIDERS]
 })
 
 export class ReviewDetailComponent implements OnInit {
@@ -39,28 +35,57 @@ export class ReviewDetailComponent implements OnInit {
   data:Object;
   loading:boolean;
   http:Http;
+  searchService:SearchService;
+  obj:any = "";
+  public results:any[] = [];
+  id:string;
 
-  constructor(private routeParams:RouteParams, http:Http) {
+  constructor(private router:Router, private routeParams:RouteParams, http:Http, _searchService:SearchService) {
     this.http = http;
+    this.searchService = _searchService;
   }
 
   ngOnInit() {
-    name = this.routeParams.get('title').replace(/%20/, " ");
-    // for (var game of REVIEWS) {
-    //   if (name.toUpperCase() == game.title.toUpperCase()) {
-    //     this.title = this.routeParams.get('title').replace(/%20/, " ");
-    //     this.game = game;
-    //
-    //     for (var key in game.platforms) {
-    //       let system = game.platforms[key];
-    //       this.platforms.push(system);
-    //     }
-    //   }
-    //   console.log(game.title);
-    // }
+    this.title = this.routeParams.get('title').replace(/%20/, " ");
+    // console.log(this.title);
+
+    this.searchService.getSearchResults(this.title);
+    this.obj = this.searchService.getData();
+    // console.log(this.obj.results.toString());
+    this.obj.results.forEach(data => {
+      var result = {
+        name: data.name,
+        deck: data.deck,
+        number_of_user_reviews: data.number_of_user_reviews,
+        site_detail_url: data.site_detail_url
+      };
+      this.results.push(result);
+    });
+
+    this.results.forEach(result => console.log('Name on review detail: ' + result.name));
+
   }
 
-  //FIXME: When going back from a search that is not in the game list, the page reverts to a white button and nothing happens when pressed. Works fine when the search succeeds.
+  // The address always ends in a '/' which will cause errors when trying to get the ID.
+  removeLastSlash(url:string) {
+    if (url.charAt(url.length - 1) == "/") {
+      url.substring(0, url.length - 2);
+    }
+    return url;
+  }
+
+  goToDetail(name:string) {
+
+    this.results.forEach(result => {
+      if (result.name == name) {
+        this.id = result.site_detail_url.substring(result.site_detail_url.slice(0, -1).lastIndexOf('/'));
+        // console.log("ID: " + this.id.replace(/[^0-9-]/g,""));
+      }
+    });
+
+    this.router.navigate(['ReviewResults', {id: this.id.replace(/[^0-9-]/g, "")}]);
+  }
+
   goBack() {
     window.history.back();
   }
