@@ -62,7 +62,7 @@ export class ReviewDetailComponent implements OnInit {
       this.results.push(result);
     });
 
-    this.results.forEach(result => console.log('Name on review detail: ' + result.name));
+    // this.results.forEach(result => console.log('Name on review detail: ' + result.name));
 
   }
 

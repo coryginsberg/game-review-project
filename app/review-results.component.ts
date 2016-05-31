@@ -40,7 +40,12 @@ export class ReviewResultsComponent implements OnInit {
   ngOnInit() {
     this.id = this.routeParams.get('id');
     this._searchService.getGameResults(this.id);
+    this._searchService.getGameResults(this.id);
+
     this.obj = this._searchService.getData();
+    this.obj = this._searchService.getData();
+
+    console.log(this.obj + "The Object");
     this.obj.results.forEach(data => {
       var result = {
         name: data.name,
